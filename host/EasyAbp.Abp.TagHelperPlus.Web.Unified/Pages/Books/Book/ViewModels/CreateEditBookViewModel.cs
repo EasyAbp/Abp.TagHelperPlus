@@ -10,7 +10,12 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book.ViewModels
         public string Name { get; set; }
 
         [Required]
-        [EasySelector("/api/identity/users", "/api/identity/users/{id}", "id", "name", "userName")]
+        [EasySelector(
+            getListedDataSourceUrl: "/api/identity/users",
+            getSingleDataSourceUrl: "/api/identity/users/{id}",
+            keyPropertyName: "id",
+            textPropertyName: "name",
+            alternativeTextPropertyName: "userName")]
         public Guid UserId { get; set; }
     }
 }

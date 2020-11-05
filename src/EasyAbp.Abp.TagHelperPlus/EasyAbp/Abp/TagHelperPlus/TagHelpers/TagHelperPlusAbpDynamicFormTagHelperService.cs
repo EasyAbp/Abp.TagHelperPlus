@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Text.Encodings.Web;
+using EasyAbp.Abp.TagHelperPlus.EasySelector;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Extensions;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.DependencyInjection;
 
-namespace EasyAbp.Abp.TagHelperPlus.EasySelector
+namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 {
     [Dependency(ReplaceServices = true)]
     [ExposeServices(typeof(IAbpTagHelperService<AbpDynamicFormTagHelper>), typeof(AbpDynamicFormTagHelperService))]
-    public class MyAbpDynamicFormTagHelperService : AbpDynamicFormTagHelperService
+    public class TagHelperPlusAbpDynamicFormTagHelperService : AbpDynamicFormTagHelperService
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public MyAbpDynamicFormTagHelperService(
+        public TagHelperPlusAbpDynamicFormTagHelperService(
             HtmlEncoder htmlEncoder,
             IHtmlGenerator htmlGenerator,
             IServiceProvider serviceProvider)
@@ -28,30 +28,6 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         protected override bool IsSelectGroup(TagHelperContext context, ModelExpression model)
         {
             return base.IsSelectGroup(context, model) || IsEasySelectorGroup(model.ModelExplorer);
-        }
-
-        protected override AbpTagHelper GetSelectGroupTagHelper(TagHelperContext context, TagHelperOutput output, ModelExpression model)
-        {
-            if (IsRadioGroup(model.ModelExplorer))
-            {
-                return GetAbpRadioInputTagHelper(model);
-            }
-            
-            if (IsEasySelectorGroup(model.ModelExplorer))
-            {
-                return GetEasySelectorTagHelper(model);
-            }
-            
-            return GetSelectTagHelper(model);
-        }
-
-        protected virtual AbpTagHelper GetEasySelectorTagHelper(ModelExpression model)
-        {
-            var abpSelectTagHelper = _serviceProvider.GetRequiredService<AbpSelectTagHelper>();
-            abpSelectTagHelper.AspFor = model;
-            abpSelectTagHelper.AspItems = null;
-            abpSelectTagHelper.ViewContext = TagHelper.ViewContext;
-            return abpSelectTagHelper;
         }
 
         protected virtual bool IsEasySelectorGroup(ModelExplorer explorer)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
+using EasyAbp.Abp.TagHelperPlus.EasySelector;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -12,15 +13,15 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Json;
 
-namespace EasyAbp.Abp.TagHelperPlus.EasySelector
+namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 {
     [Dependency(ReplaceServices = true)]
     [ExposeServices(typeof(IAbpTagHelperService<AbpSelectTagHelper>), typeof(AbpSelectTagHelperService))]
-    public class MyAbpSelectTagHelperService : AbpSelectTagHelperService
+    public class TagHelperPlusAbpSelectTagHelperService : AbpSelectTagHelperService
     {
         private readonly IJsonSerializer _jsonSerializer;
 
-        public MyAbpSelectTagHelperService(
+        public TagHelperPlusAbpSelectTagHelperService(
             IHtmlGenerator generator,
             HtmlEncoder encoder,
             IAbpTagHelperLocalizer tagHelperLocalizer,

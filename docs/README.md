@@ -17,9 +17,13 @@ We have launched an online demo for this module: [https://taghelper.samples.easy
 
 1. Add `DependsOn(typeof(AbpTagHelperPlusModule))` attribute to configure the module dependencies. ([see how](https://github.com/EasyAbp/EasyAbpGuide/blob/master/How-To.md#add-module-dependencies))
 
-## Usage
+## Features
 
-Todo.
+### EasySelector
+
+Improve the abp-select to support paged items and search. ([see demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book/ViewModels/CreateEditBookViewModel.cs#L13-L18))
+
+![CacheItems](/docs/images/EasySelector/EditBook.png)
 
 ## Road map
 
