@@ -41,19 +41,24 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         
         protected override string SurroundInnerHtmlAndGet(TagHelperContext context, TagHelperOutput output, string innerHtml)
         {
+            var easySelectorAttribute = TagHelper.AspFor.ModelExplorer.GetAttribute<EasySelectorAttribute>();
+
+            if (easySelectorAttribute == null)
+            {
+                return base.SurroundInnerHtmlAndGet(context, output, innerHtml);
+            }
+            
             return "<div class=\"form-group\">" +
                    Environment.NewLine +
-                   GetSelect2ConfigurationCode(context) +
+                   GetSelect2ConfigurationCode(context, easySelectorAttribute) +
                    Environment.NewLine +
                    innerHtml +
                    Environment.NewLine +
                    "</div>";
         }
         
-        protected virtual string GetSelect2ConfigurationCode(TagHelperContext context)
+        protected virtual string GetSelect2ConfigurationCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
-            var easySelectorAttribute = TagHelper.AspFor.ModelExplorer.GetAttribute<EasySelectorAttribute>();
-
             var currentValues = context.Items.First(x => !(x.Key is string)).Value;
 
             var placeHolder = TagHelper.AspFor.Metadata.Placeholder;
