@@ -35,13 +35,19 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
 
         public int MaxResultCount { get; set; }
 
+        /// <summary>
+        /// Hide the sub text (key) of items.
+        /// </summary>
+        public bool HideSubText { get; set; }
+        
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
             [NotNull] string getSingleDataSourceUrl,
             [NotNull] string keyPropertyName = "id",
             [NotNull] string textPropertyName = "id",
             [CanBeNull] string alternativeTextPropertyName = "id",
-            int maxResultCount = 10)
+            int maxResultCount = 10,
+            bool hideSubText = false)
         {
             GetListedDataSourceUrl = getListedDataSourceUrl;
             GetSingleDataSourceUrl = getSingleDataSourceUrl;
@@ -49,6 +55,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             TextPropertyName = textPropertyName;
             AlternativeTextPropertyName = alternativeTextPropertyName;
             MaxResultCount = maxResultCount;
+            HideSubText = hideSubText;
         }
     }
 }

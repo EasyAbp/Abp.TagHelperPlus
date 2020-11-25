@@ -15,7 +15,8 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book.ViewModels
             getSingleDataSourceUrl: "/api/identity/users/{id}",
             keyPropertyName: "id",
             textPropertyName: "name",
-            alternativeTextPropertyName: "userName")]
+            alternativeTextPropertyName: "userName",
+            hideSubText: false)]
         public Guid UserId { get; set; }
     }
 }
