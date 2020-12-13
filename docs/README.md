@@ -28,4 +28,5 @@ Improve the abp-select to support paged items and search. ([see demo](https://gi
 ## Road map
 
 - [x] Easy Selector
+- [ ] Items sorter
 - [ ] Rich text editor
