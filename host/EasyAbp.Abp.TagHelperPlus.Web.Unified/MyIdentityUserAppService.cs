@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -10,8 +12,12 @@ namespace EasyAbp.Abp.TagHelperPlus
     [Dependency(ReplaceServices = true)]
     public class MyIdentityUserAppService : IdentityUserAppService
     {
-        public MyIdentityUserAppService(IdentityUserManager userManager, IIdentityUserRepository userRepository,
-            IIdentityRoleRepository roleRepository) : base(userManager, userRepository, roleRepository)
+        public MyIdentityUserAppService(
+            IdentityUserManager userManager,
+            IIdentityUserRepository userRepository,
+            IIdentityRoleRepository roleRepository,
+            IOptions<IdentityOptions> identityOptions)
+            : base(userManager, userRepository, roleRepository, identityOptions)
         {
         }
 
