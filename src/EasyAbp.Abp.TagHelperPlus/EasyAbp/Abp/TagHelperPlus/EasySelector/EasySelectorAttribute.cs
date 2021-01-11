@@ -40,6 +40,11 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// </summary>
         public bool HideSubText { get; set; }
         
+        /// <summary>
+        /// Please set to true if the item is not in a modal.
+        /// </summary>
+        public bool RunScriptOnWindowLoad { get; set; }
+        
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
             [NotNull] string getSingleDataSourceUrl,
@@ -47,7 +52,8 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [NotNull] string textPropertyName = "id",
             [CanBeNull] string alternativeTextPropertyName = "id",
             int maxResultCount = 10,
-            bool hideSubText = false)
+            bool hideSubText = false,
+            bool runScriptOnWindowLoad = false)
         {
             GetListedDataSourceUrl = getListedDataSourceUrl;
             GetSingleDataSourceUrl = getSingleDataSourceUrl;
@@ -56,6 +62,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             AlternativeTextPropertyName = alternativeTextPropertyName;
             MaxResultCount = maxResultCount;
             HideSubText = hideSubText;
+            RunScriptOnWindowLoad = runScriptOnWindowLoad;
         }
     }
 }

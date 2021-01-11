@@ -26,7 +26,7 @@ namespace EasyAbp.Abp.TagHelperPlus.Books
         }
 
         [HttpGet]
-        public async Task<PagedResultDto<BookDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        public async Task<PagedResultDto<BookDto>> GetListAsync(GetBookListInput input)
         {
             return await _bookAppService.GetListAsync(input);
         }
