@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text.Encodings.Web;
 using EasyAbp.Abp.TagHelperPlus.EasySelector;
+using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.Extensions.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Extensions;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
@@ -19,8 +21,9 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         public TagHelperPlusAbpDynamicFormTagHelperService(
             HtmlEncoder htmlEncoder,
             IHtmlGenerator htmlGenerator,
-            IServiceProvider serviceProvider)
-            : base(htmlEncoder, htmlGenerator, serviceProvider)
+            IServiceProvider serviceProvider,
+            IStringLocalizer<AbpUiResource> localizer)
+            : base(htmlEncoder, htmlGenerator, serviceProvider, localizer)
         {
             _serviceProvider = serviceProvider;
         }
