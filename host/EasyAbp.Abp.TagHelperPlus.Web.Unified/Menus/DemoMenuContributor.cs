@@ -28,6 +28,8 @@ namespace EasyAbp.Abp.TagHelperPlus.Menus
             context.Menu.AddItem(new ApplicationMenuItem("Book", "Book", "/Books/Book"));
             
             context.Menu.AddItem(new ApplicationMenuItem("Book2", "Book2", "/Books/Book2"));
+
+            context.Menu.AddItem(new ApplicationMenuItem("Book3", "Book3", "/Books/Book3"));
         }
     }
 }
