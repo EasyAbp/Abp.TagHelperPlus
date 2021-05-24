@@ -23,12 +23,18 @@ We have launched an online demo for this module: [https://taghelper.samples.easy
 
 ### EasySelector
 
-Improve the abp-select to support paged items and search. ([see demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book/ViewModels/CreateEditBookViewModel.cs#L13-L18))
+Improve the abp-select to support paged items and search.
 
-![CacheItems](/docs/images/EasySelector/EditBook.png)
+   * Use abp-dynamic-form: [demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book/ViewModels/CreateEditBookViewModel.cs#L13-L18).
+      * Use in modal: [demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book/ViewModels/CreateEditBookViewModel.cs#L11).
+      * Use on page: [demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book2/Index.cshtml#L33).
+   * Use abp-select: [demo](https://github.com/EasyAbp/Abp.TagHelperPlus/blob/master/host/EasyAbp.Abp.TagHelperPlus.Web.Unified/Pages/Books/Book3/Index.cshtml#L33).
+
+![EditBook](/docs/images/EasySelector/EditBook.png)
 
 ## Road map
 
 - [x] Easy Selector
+- [x] Support abp-select
 - [ ] Items sorter
 - [ ] Rich text editor
