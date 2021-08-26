@@ -36,7 +36,9 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            var innerHtml = await GetFormInputGroupAsHtmlAsync(context, output);
+            var childContent = await output.GetChildContentAsync();
+
+            var innerHtml = await GetFormInputGroupAsHtmlAsync(context, output, childContent);
 
             var order = TagHelper.AspFor.ModelExplorer.GetDisplayOrder();
 
