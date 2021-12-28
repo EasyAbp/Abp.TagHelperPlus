@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -12,9 +13,10 @@ namespace EasyAbp.Abp.TagHelperPlus.Books
         {
         }
 
-        protected override IQueryable<Book> CreateFilteredQuery(GetBookListInput input)
+        protected override async Task<IQueryable<Book>> CreateFilteredQueryAsync(GetBookListInput input)
         {
-            return ReadOnlyRepository.WhereIf(input.UserId.HasValue, x => x.UserId == input.UserId.Value);
+            return (await ReadOnlyRepository.GetQueryableAsync()).WhereIf(input.UserId.HasValue,
+                x => x.UserId == input.UserId.Value);
         }
 
         protected override BookDto MapToGetOutputDto(Book entity)
