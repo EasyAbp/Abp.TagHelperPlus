@@ -16,8 +16,6 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
     [ExposeServices(typeof(IAbpTagHelperService<AbpDynamicFormTagHelper>), typeof(AbpDynamicFormTagHelperService))]
     public class TagHelperPlusAbpDynamicFormTagHelperService : AbpDynamicFormTagHelperService
     {
-        private readonly IServiceProvider _serviceProvider;
-
         public TagHelperPlusAbpDynamicFormTagHelperService(
             HtmlEncoder htmlEncoder,
             IHtmlGenerator htmlGenerator,
@@ -25,7 +23,6 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
             IStringLocalizer<AbpUiResource> localizer)
             : base(htmlEncoder, htmlGenerator, serviceProvider, localizer)
         {
-            _serviceProvider = serviceProvider;
         }
 
         protected override bool IsSelectGroup(TagHelperContext context, ModelExpression model)
