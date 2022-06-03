@@ -34,6 +34,11 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         public string AlternativeTextPropertyName { get; set; }
 
         /// <summary>
+        /// Name of the item list property in the get-list result.
+        /// </summary>
+        public string ItemListPropertyName { get; set; }
+
+        /// <summary>
         /// The remote service base URL of the module will be add to every URLs as a prefix.
         /// </summary>
         public string ModuleName { get; set; }
@@ -56,6 +61,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [NotNull] string keyPropertyName = "id",
             [NotNull] string textPropertyName = "id",
             [CanBeNull] string alternativeTextPropertyName = "id",
+            [NotNull] string itemListPropertyName = "items",
             [CanBeNull] string moduleName = null,
             int maxResultCount = 10,
             bool hideSubText = false,
@@ -66,6 +72,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             KeyPropertyName = keyPropertyName;
             TextPropertyName = textPropertyName;
             AlternativeTextPropertyName = alternativeTextPropertyName;
+            ItemListPropertyName = itemListPropertyName;
             ModuleName = moduleName;
             MaxResultCount = maxResultCount;
             HideSubText = hideSubText;
