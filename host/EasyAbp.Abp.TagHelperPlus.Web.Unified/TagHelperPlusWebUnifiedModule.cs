@@ -20,6 +20,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Http.Client;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Identity.Web;
@@ -131,6 +132,11 @@ namespace EasyAbp.Abp.TagHelperPlus
             {
                 options.MenuContributors.Add(new DemoMenuContributor());
             });
+            
+            // Configure<AbpRemoteServiceOptions>(options =>
+            // {
+            //     options.RemoteServices.Add("TestModule", new RemoteServiceConfiguration("https://myapp-123.com"));
+            // });
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bootstrap" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Http.Client" Version="$(AbpVersion)" />
   </ItemGroup>
 
 </Project>

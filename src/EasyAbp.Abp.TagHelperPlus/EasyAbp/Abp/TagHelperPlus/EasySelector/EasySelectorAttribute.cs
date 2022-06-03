@@ -33,6 +33,11 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// </summary>
         public string AlternativeTextPropertyName { get; set; }
 
+        /// <summary>
+        /// The remote service base URL of the module will be add to every URLs as a prefix.
+        /// </summary>
+        public string ModuleName { get; set; }
+
         public int MaxResultCount { get; set; }
 
         /// <summary>
@@ -51,6 +56,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [NotNull] string keyPropertyName = "id",
             [NotNull] string textPropertyName = "id",
             [CanBeNull] string alternativeTextPropertyName = "id",
+            [CanBeNull] string moduleName = null,
             int maxResultCount = 10,
             bool hideSubText = false,
             bool runScriptOnWindowLoad = false)
@@ -60,6 +66,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             KeyPropertyName = keyPropertyName;
             TextPropertyName = textPropertyName;
             AlternativeTextPropertyName = alternativeTextPropertyName;
+            ModuleName = moduleName;
             MaxResultCount = maxResultCount;
             HideSubText = hideSubText;
             RunScriptOnWindowLoad = runScriptOnWindowLoad;

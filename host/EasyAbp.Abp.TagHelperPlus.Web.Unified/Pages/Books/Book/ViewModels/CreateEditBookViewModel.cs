@@ -16,6 +16,7 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book.ViewModels
             keyPropertyName: "id",
             textPropertyName: "name",
             alternativeTextPropertyName: "userName",
+            moduleName: "TestModule",
             hideSubText: false)]
         public Guid UserId { get; set; }
     }
