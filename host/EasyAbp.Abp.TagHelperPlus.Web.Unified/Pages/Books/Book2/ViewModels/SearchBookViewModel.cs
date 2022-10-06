@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using EasyAbp.Abp.TagHelperPlus.EasySelector;
+using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 
 namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book2.ViewModels
 {
@@ -17,5 +19,10 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book2.ViewModels
             runScriptOnWindowLoad: true // Please set to true if the item is not in a modal.
         )]
         public Guid UserId { get; set; }
+        public bool? NullableBoolean { get; set; }
+
+        public bool NotNullBoolean { get; set; }
+
+
     }
 }

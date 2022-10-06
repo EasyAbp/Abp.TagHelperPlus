@@ -20,5 +20,7 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book.ViewModels
             moduleName: "TestModule",
             hideSubText: false)]
         public Guid UserId { get; set; }
+        public bool? NullableBoolean { get; set; }
+        public bool NotNullBoolean { get; set; }
     }
 }

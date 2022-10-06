@@ -16,6 +16,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Json;
+using Volo.Abp.Localization;
 
 namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 {
@@ -25,6 +26,8 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
     {
         private readonly IJsonSerializer _jsonSerializer;
         private readonly AbpRemoteServiceOptions _remoteServiceOptions;
+        private readonly IAbpTagHelperLocalizer _tagHelperLocalizer;
+        private readonly IStringLocalizerFactory _stringLocalizerFactory;
 
         public TagHelperPlusAbpSelectTagHelperService(
             IHtmlGenerator generator,
@@ -37,6 +40,8 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         {
             _jsonSerializer = jsonSerializer;
             _remoteServiceOptions = remoteServiceOptions.Value;
+            _tagHelperLocalizer = tagHelperLocalizer;
+            _stringLocalizerFactory = stringLocalizerFactory;
         }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
@@ -75,10 +80,57 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         protected override List<SelectListItem> GetSelectItems(TagHelperContext context, TagHelperOutput output)
         {
             var easySelectorAttribute = TagHelper.AspFor.ModelExplorer.GetAttribute<EasySelectorAttribute>();
+            if (easySelectorAttribute != null)
+            {
+                return new List<SelectListItem>();
+            }
 
-            return easySelectorAttribute != null ? new List<SelectListItem>() : base.GetSelectItems(context, output);
+            var isNullableBoolean = TagHelper.AspFor.ModelExplorer.ModelType.GenericTypeArguments.Any(t => t.Name == "Boolean");
+            if (isNullableBoolean)
+            {
+                return GetSelectItemsFromNullableBoolean(context, output, TagHelper.AspFor.ModelExplorer);
+            }
+
+            return base.GetSelectItems(context, output);
         }
-        
+
+        protected virtual List<SelectListItem> GetSelectItemsFromNullableBoolean(TagHelperContext context, TagHelperOutput output, ModelExplorer explorer)
+        {
+            var selectItems = new List<SelectListItem>();
+            var isNullableType = Nullable.GetUnderlyingType(explorer.ModelType) != null;
+
+            if (isNullableType)
+            {
+                selectItems.Add(new SelectListItem());
+            }
+
+            var containerLocalizer = _tagHelperLocalizer.GetLocalizerOrNull(explorer.Container.ModelType.Assembly);
+
+            foreach (var iteam in new List<string> { "TRUE","FALSE"})
+            {
+                var localizedMemberName = AbpInternalLocalizationHelper.LocalizeWithFallback(
+                    new[]
+                    {
+                        containerLocalizer,
+                        _stringLocalizerFactory.CreateDefaultOrNull()
+                    },
+                    new[]
+                    {
+                        iteam
+                    },
+                    iteam
+                );
+
+                selectItems.Add(new SelectListItem
+                {
+                    Value = iteam,
+                    Text = localizedMemberName
+                });
+            }
+
+            return selectItems;
+        }
+
         protected override string SurroundInnerHtmlAndGet(TagHelperContext context, TagHelperOutput output, string innerHtml)
         {
             var easySelectorAttribute = TagHelper.AspFor.ModelExplorer.GetAttribute<EasySelectorAttribute>();
@@ -87,7 +139,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
             {
                 return base.SurroundInnerHtmlAndGet(context, output, innerHtml);
             }
-            
+
             return "<div class=\"form-group\">" +
                    Environment.NewLine +
                    GetSelect2ConfigurationCode(context, easySelectorAttribute) +
@@ -96,11 +148,11 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
                    Environment.NewLine +
                    "</div>";
         }
-        
+
         protected virtual string GetSelect2ConfigurationCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
             var styleCode = GetStyleCode(context, easySelectorAttribute);
-            
+
             var scriptCode = GetScriptCode(context, easySelectorAttribute);
 
             return styleCode + scriptCode;
@@ -110,7 +162,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         {
             return $"<style>.select2-selection__rendered{{line-height:35px !important;padding-left:0.75rem !important;}}.select2-container{{ z-index:1060 }} .select2-container .select2-selection--single{{height:38px !important;}}.select2-selection__arrow{{height:38px !important;}} .selection-subtext {{ padding-left: 10px; color: #808080 !important; font-size: smaller; }}</style>";
         }
-        
+
         protected virtual string GetScriptCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
             var currentValues = context.Items.First(x => !(x.Key is string)).Value;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.Encodings.Web;
 using EasyAbp.Abp.TagHelperPlus.EasySelector;
 using Localization.Resources.AbpUi;
@@ -27,12 +28,17 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 
         protected override bool IsSelectGroup(TagHelperContext context, ModelExpression model)
         {
-            return base.IsSelectGroup(context, model) || IsEasySelectorGroup(model.ModelExplorer);
+            return base.IsSelectGroup(context, model) || IsEasySelectorGroup(model.ModelExplorer) || IsNullableBoolean(model.ModelExplorer);
         }
 
         protected virtual bool IsEasySelectorGroup(ModelExplorer explorer)
         {
             return explorer.GetAttribute<EasySelectorAttribute>() != null;
+        }
+
+        protected virtual bool IsNullableBoolean(ModelExplorer explorer)
+        {
+            return explorer.ModelType.GenericTypeArguments.Any(t => t.Name == "Boolean");
         }
     }
 }
