@@ -3,7 +3,7 @@
 [![ABP version](https://img.shields.io/badge/dynamic/xml?style=flat-square&color=yellow&label=abp&query=%2F%2FProject%2FPropertyGroup%2FAbpVersion&url=https%3A%2F%2Fraw.githubusercontent.com%2FEasyAbp%2FAbp.TagHelperPlus%2Fmaster%2FDirectory.Build.props)](https://abp.io)
 [![NuGet](https://img.shields.io/nuget/v/EasyAbp.Abp.TagHelperPlus.svg?style=flat-square)](https://www.nuget.org/packages/EasyAbp.Abp.TagHelperPlus)
 [![NuGet Download](https://img.shields.io/nuget/dt/EasyAbp.Abp.TagHelperPlus.svg?style=flat-square)](https://www.nuget.org/packages/EasyAbp.Abp.TagHelperPlus)
-[![Discord online](https://badgen.net/discord/online-members/S6QaezrCRq?label=Discord)](https://discord.gg/S6QaezrCRq)
+[![Discord online](https://badgen.net/discord/online-members/xyg8TrRa27?label=Discord)](https://discord.gg/xyg8TrRa27)
 [![GitHub stars](https://img.shields.io/github/stars/EasyAbp/Abp.TagHelperPlus?style=social)](https://www.github.com/EasyAbp/Abp.TagHelperPlus)
 
 An Abp MVC UI tag-helper enhancement module to enhance ABP built-in tag-helpers and provide new tag-helpers such as rich text editor, advanced selector, and more.
