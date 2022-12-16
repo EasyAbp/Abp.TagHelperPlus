@@ -22,6 +22,8 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book3
         )]
         public Guid UserId { get; set; }
 
+        public string Title { get; set; }
+
         public virtual void OnGetAsync()
         {
         }

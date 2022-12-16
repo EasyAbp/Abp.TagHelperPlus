@@ -17,5 +17,7 @@ namespace EasyAbp.Abp.TagHelperPlus.Pages.Books.Book2.ViewModels
             runScriptOnWindowLoad: true // Please set to true if the item is not in a modal.
         )]
         public Guid UserId { get; set; }
+
+        public string Title { get; set; }
     }
 }

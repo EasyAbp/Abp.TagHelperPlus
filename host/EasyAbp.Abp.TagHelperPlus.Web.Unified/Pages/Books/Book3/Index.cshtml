@@ -6,9 +6,9 @@
 @inject IPageLayout PageLayout
 @inject IHtmlLocalizer<AbpValidationResource> L
 @{
-    PageLayout.Content.Title = L["Book"].Value;
-    PageLayout.Content.BreadCrumb.Add(L["Menu:Book"].Value);
-    PageLayout.Content.MenuItemName = "Book";
+    PageLayout.Content.Title = L["Book3"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Book3"].Value);
+    PageLayout.Content.MenuItemName = "Book3";
 }
 
 @section scripts
@@ -31,6 +31,7 @@
         </abp-card-header>
         <abp-card-body>
             <abp-select asp-for="UserId" />
+            <abp-input asp-for="Title" />
         </abp-card-body>
         <abp-modal-footer>
             <abp-button id="search-button" button-type="Primary" text="Search"/>
