@@ -108,7 +108,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 
         protected virtual string GetStyleCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
-            return $"<style>.select2-selection__rendered{{line-height:35px !important;padding-left:0.75rem !important;}}.select2-container{{ z-index:1060 }} .select2-container .select2-selection--single{{height:38px !important;}}.select2-selection__arrow{{height:38px !important;}} .selection-subtext {{ padding-left: 10px; color: #808080 !important; font-size: smaller; }}</style>";
+            return $"<style>.select2-selection__rendered{{line-height:35px !important;padding-left:0.75rem !important;}}.select2-container{{ z-index:1049 !important }} .select2-container .select2-selection--single{{height:38px !important;}}.select2-selection__arrow{{height:38px !important;}} .selection-subtext {{ padding-left: 10px; color: #808080 !important; font-size: smaller; }}</style>";
         }
         
         protected virtual string GetScriptCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
