@@ -88,7 +88,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
                 return base.SurroundInnerHtmlAndGet(context, output, innerHtml);
             }
             
-            return "<div class=\"form-group\">" +
+            return "<div class=\"mb-3 form-group\">" +
                    Environment.NewLine +
                    GetSelect2ConfigurationCode(context, easySelectorAttribute) +
                    Environment.NewLine +
