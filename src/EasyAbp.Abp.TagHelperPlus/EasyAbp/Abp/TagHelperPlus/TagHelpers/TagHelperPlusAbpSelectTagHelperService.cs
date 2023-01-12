@@ -16,6 +16,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Json;
+using Volo.Abp.Localization;
 
 namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 {
@@ -31,9 +32,10 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
             HtmlEncoder encoder,
             IAbpTagHelperLocalizer tagHelperLocalizer,
             IStringLocalizerFactory stringLocalizerFactory,
+            IAbpEnumLocalizer abpEnumLocalizer,
             IJsonSerializer jsonSerializer,
             IOptions<AbpRemoteServiceOptions> remoteServiceOptions) : base(generator,
-            encoder, tagHelperLocalizer, stringLocalizerFactory)
+            encoder, tagHelperLocalizer, stringLocalizerFactory, abpEnumLocalizer)
         {
             _jsonSerializer = jsonSerializer;
             _remoteServiceOptions = remoteServiceOptions.Value;
