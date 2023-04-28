@@ -54,6 +54,8 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// Please set to true if the item is not in a modal.
         /// </summary>
         public bool RunScriptOnWindowLoad { get; set; }
+
+        public string FilterParamName { get; set; }
         
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
@@ -63,6 +65,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [CanBeNull] string alternativeTextPropertyName = "id",
             [NotNull] string itemListPropertyName = "items",
             [CanBeNull] string moduleName = null,
+            [NotNull] string filterParamName = "filter",
             int maxResultCount = 10,
             bool hideSubText = false,
             bool runScriptOnWindowLoad = false)
@@ -77,6 +80,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             MaxResultCount = maxResultCount;
             HideSubText = hideSubText;
             RunScriptOnWindowLoad = runScriptOnWindowLoad;
+            FilterParamName = filterParamName;
         }
     }
 }
