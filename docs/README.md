@@ -8,10 +8,6 @@
 
 An Abp MVC UI tag-helper enhancement module to enhance ABP built-in tag-helpers and provide new tag-helpers such as rich text editor, advanced selector, and more.
 
-## Online Demo
-
-We have launched an online demo for this module: [https://taghelper.samples.easyabp.io](https://taghelper.samples.easyabp.io)
-
 ## Installation
 
 1. Install the following NuGet packages. ([see how](https://github.com/EasyAbp/EasyAbpGuide/blob/master/docs/How-To.md#add-nuget-packages))
