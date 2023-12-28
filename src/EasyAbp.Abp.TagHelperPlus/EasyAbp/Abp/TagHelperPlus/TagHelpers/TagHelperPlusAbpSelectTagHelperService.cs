@@ -80,7 +80,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 
             return easySelectorAttribute != null ? new List<SelectListItem>() : base.GetSelectItems(context, output);
         }
-        
+
         protected override string SurroundInnerHtmlAndGet(TagHelperContext context, TagHelperOutput output, string innerHtml)
         {
             var easySelectorAttribute = TagHelper.AspFor.ModelExplorer.GetAttribute<EasySelectorAttribute>();
@@ -89,7 +89,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
             {
                 return base.SurroundInnerHtmlAndGet(context, output, innerHtml);
             }
-            
+
             return "<div class=\"mb-3 form-group\">" +
                    Environment.NewLine +
                    GetSelect2ConfigurationCode(context, easySelectorAttribute) +
@@ -98,11 +98,11 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
                    Environment.NewLine +
                    "</div>";
         }
-        
+
         protected virtual string GetSelect2ConfigurationCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
             var styleCode = GetStyleCode(context, easySelectorAttribute);
-            
+
             var scriptCode = GetScriptCode(context, easySelectorAttribute);
 
             return styleCode + scriptCode;
@@ -112,7 +112,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
         {
             return $"<style>.select2-selection__rendered{{line-height:48px !important;padding-left:1.25rem !important;}}.select2-selection__clear{{right:10px}} .select2-container .select2-selection--single{{height:48px !important;}}.select2-selection__arrow{{height:48px !important;right:10px !important}} .selection-subtext {{ padding-left: 10px; color: #808080 !important; font-size: smaller; }}</style>";
         }
-        
+
         protected virtual string GetScriptCode(TagHelperContext context, EasySelectorAttribute easySelectorAttribute)
         {
             var currentValues = context.Items.First(x => !(x.Key is string)).Value;
@@ -131,8 +131,10 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 
             var dropdownParent = easySelectorAttribute.RunScriptOnWindowLoad ? "" : $"dropdownParent: $('#{tagId}').parent().parent(),";
 
+            var transport = $"transport: function (params, success, failure) {{if (typeof {tagId.ToCamelCase()}cacheList === 'undefined') {{{tagId.ToCamelCase()}cacheList = {{ totalCount: 0, {easySelectorAttribute.ItemListPropertyName}: [] }};}}if (!params.data || params.data.filter == '' && {tagId.ToCamelCase()}cacheList) return success({tagId.ToCamelCase()}cacheList);let matchList = {tagId.ToCamelCase()}cacheList.{easySelectorAttribute.ItemListPropertyName}.filter(function (item) {{return params.data.filter == undefined||stringMatch(params.data.filter, item.{easySelectorAttribute.TextPropertyName}?? item.{easySelectorAttribute.AlternativeTextPropertyName});}});if (params.data && matchList.length > params.data.skipCount) return success({{ totalCount: matchList.length, {easySelectorAttribute.ItemListPropertyName}: matchList.slice(params.data.skipCount, params.data.skipCount + params.data.maxResultCount) }});var $request = $.ajax(params);$request.then((res) => {{if (params.data.skipCount == 0) {{ {tagId.ToCamelCase()}cacheList = res; }} else {{ {tagId.ToCamelCase()}cacheList.{easySelectorAttribute.ItemListPropertyName} = {tagId.ToCamelCase()}cacheList.{easySelectorAttribute.ItemListPropertyName}.concat(res.{easySelectorAttribute.ItemListPropertyName}); }}success(res);}});$request.fail(failure);return $request;}}";
+
             var baseUrl = configuration?.BaseUrl;
-            var innerCode = $"$(function () {{ let currentValues = {_jsonSerializer.Serialize(currentValues)}; function stringMatch(term,candidate){{return candidate&&candidate.toLowerCase().indexOf(term.toLowerCase())>=0}}; function matchCustom(params,data){{if($.trim(params.term)===\"\"){{return data}}if(typeof data.text===\"undefined\"){{return null}}if(stringMatch(params.term,data.text)){{return data}}if(stringMatch(params.term,state.id)){{return data}}return null}}; let select2Item = function (state) {{ return $('<span>' + state.text{subTextContent} + '</span>'); }}; let select2Option = {{ allowClear: true,minimumInputLength:{easySelectorAttribute.MinimumInputLength}, width: \"100%\", matcher: matchCustom, templateResult: select2Item, templateSelection: select2Item,{dropdownParent} ajax: {{ url: '{baseUrl}{easySelectorAttribute.GetListedDataSourceUrl}', dataType: \"json\", delay: {easySelectorAttribute.Delay}, data: function (params) {{ params.page = params.page || 1; return {{ {easySelectorAttribute.FilterParamName}: params.term, skipCount: (params.page - 1) * {easySelectorAttribute.MaxResultCount}, maxResultCount: {easySelectorAttribute.MaxResultCount}, }} }}, processResults: function (data, params) {{ params.page = params.page || 1; return {{ results: data.{easySelectorAttribute.ItemListPropertyName}.map(function (item) {{ return {{ id: item.{easySelectorAttribute.KeyPropertyName}, text: item.{easySelectorAttribute.TextPropertyName} ?? item.{easySelectorAttribute.AlternativeTextPropertyName} }} }}), pagination: {{ more: (params.page * {easySelectorAttribute.MaxResultCount}) < data.totalCount }} }}; }}, cache: true }}, placeholder: {{ id: '', text: '{placeHolder}' }} }}; $(\"#{tagId}\").select2(select2Option); currentValues && currentValues.values.forEach(function(e) {{ if (!$(\"#{tagId}\").find('option:contains(' + e + ')').length && (e != \"00000000-0000-0000-0000-000000000000\" && e != \"\" && e != \"0\")) abp.ajax({{ type: 'GET', url: '{baseUrl}{easySelectorAttribute.GetSingleDataSourceUrl}'.replace('{{id}}', e), success: function (result) {{ $(\"#{tagId}\").append($('<option value=\"' + e + '\">').text(result.{easySelectorAttribute.TextPropertyName} ?? result.{easySelectorAttribute.AlternativeTextPropertyName})); $(\"#{tagId}\").val(currentValues.values).trigger('change'); }}}}); }}); }});";
+            var innerCode = $"$(function () {{ let currentValues = {_jsonSerializer.Serialize(currentValues)}; function stringMatch(term,candidate){{return candidate&&candidate.toLowerCase().indexOf(term.toLowerCase())>=0}}; function matchCustom(params,data){{if($.trim(params.term)===\"\"){{return data}}if(typeof data.text===\"undefined\"){{return null}}if(stringMatch(params.term,data.text)){{return data}}if(stringMatch(params.term,state.id)){{return data}}return null}}; let select2Item = function (state) {{ return $('<span>' + state.text{subTextContent} + '</span>'); }}; let select2Option = {{ allowClear: true,minimumInputLength:{easySelectorAttribute.MinimumInputLength}, width: \"100%\", matcher: matchCustom, templateResult: select2Item, templateSelection: select2Item,{dropdownParent} ajax: {{ url: '{baseUrl}{easySelectorAttribute.GetListedDataSourceUrl}', dataType: \"json\", delay: {easySelectorAttribute.Delay}, data: function (params) {{ params.page = params.page || 1; return {{ {easySelectorAttribute.FilterParamName}: params.term, skipCount: (params.page - 1) * {easySelectorAttribute.MaxResultCount}, maxResultCount: {easySelectorAttribute.MaxResultCount}, }} }},{transport}, processResults: function (data, params) {{ params.page = params.page || 1; return {{ results: data.{easySelectorAttribute.ItemListPropertyName}.map(function (item) {{ return {{ id: item.{easySelectorAttribute.KeyPropertyName}, text: item.{easySelectorAttribute.TextPropertyName} ?? item.{easySelectorAttribute.AlternativeTextPropertyName} }} }}), pagination: {{ more: (params.page * {easySelectorAttribute.MaxResultCount}) < data.totalCount }} }}; }}, cache: true }}, placeholder: {{ id: '', text: '{placeHolder}' }} }}; $(\"#{tagId}\").select2(select2Option); currentValues && currentValues.values.forEach(function(e) {{ if (!$(\"#{tagId}\").find('option:contains(' + e + ')').length && (e != \"00000000-0000-0000-0000-000000000000\" && e != \"\" && e != \"0\")) abp.ajax({{ type: 'GET', url: '{baseUrl}{easySelectorAttribute.GetSingleDataSourceUrl}'.replace('{{id}}', e), success: function (result) {{ $(\"#{tagId}\").append($('<option value=\"' + e + '\">').text(result.{easySelectorAttribute.TextPropertyName} ?? result.{easySelectorAttribute.AlternativeTextPropertyName})); $(\"#{tagId}\").val(currentValues.values).trigger('change'); }}}}); }}); }});";
 
             return easySelectorAttribute.RunScriptOnWindowLoad
                 ? $"<script>window.addEventListener('load', function() {{{innerCode}}}, false)</script>"
