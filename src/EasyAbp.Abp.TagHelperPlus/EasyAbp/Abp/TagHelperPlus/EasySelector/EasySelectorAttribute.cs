@@ -10,7 +10,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// </summary>
         /// <example>/api/identity/users</example>
         public string GetListedDataSourceUrl { get; set; }
-        
+
         /// <summary>
         /// Url to get single data.
         /// Use <code>{id}`</code> as the key.
@@ -27,7 +27,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// Used to be the display text of the option.
         /// </summary>
         public string TextPropertyName { get; set; }
-        
+
         /// <summary>
         /// Used to be the display text of the option if the text property is null.
         /// </summary>
@@ -49,14 +49,18 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// Hide the sub text (key) of items.
         /// </summary>
         public bool HideSubText { get; set; }
-        
+
         /// <summary>
         /// Please set to true if the item is not in a modal.
         /// </summary>
         public bool RunScriptOnWindowLoad { get; set; }
 
         public string FilterParamName { get; set; }
-        
+
+        public int Delay { get; set; }
+
+        public int MinimumInputLength { get; set; }
+
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
             [NotNull] string getSingleDataSourceUrl,
@@ -68,7 +72,9 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [NotNull] string filterParamName = "filter",
             int maxResultCount = 10,
             bool hideSubText = false,
-            bool runScriptOnWindowLoad = false)
+            bool runScriptOnWindowLoad = false,
+            int delay = 250,
+            int minimumInputLength = 0)
         {
             GetListedDataSourceUrl = getListedDataSourceUrl;
             GetSingleDataSourceUrl = getSingleDataSourceUrl;
@@ -81,6 +87,8 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             HideSubText = hideSubText;
             RunScriptOnWindowLoad = runScriptOnWindowLoad;
             FilterParamName = filterParamName;
+            Delay = delay;
+            MinimumInputLength = minimumInputLength;
         }
     }
 }
