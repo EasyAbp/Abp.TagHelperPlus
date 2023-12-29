@@ -61,6 +61,8 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
 
         public int MinimumInputLength { get; set; }
 
+        public bool EnableCache { get; set; }
+
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
             [NotNull] string getSingleDataSourceUrl,
@@ -74,7 +76,8 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             bool hideSubText = false,
             bool runScriptOnWindowLoad = false,
             int delay = 250,
-            int minimumInputLength = 0)
+            int minimumInputLength = 0,
+            bool enableCache = false)
         {
             GetListedDataSourceUrl = getListedDataSourceUrl;
             GetSingleDataSourceUrl = getSingleDataSourceUrl;
@@ -89,6 +92,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             FilterParamName = filterParamName;
             Delay = delay;
             MinimumInputLength = minimumInputLength;
+            EnableCache = enableCache;
         }
     }
 }
