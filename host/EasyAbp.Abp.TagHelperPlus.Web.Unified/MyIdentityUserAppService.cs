@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 
@@ -16,8 +17,9 @@ namespace EasyAbp.Abp.TagHelperPlus
             IdentityUserManager userManager,
             IIdentityUserRepository userRepository,
             IIdentityRoleRepository roleRepository,
-            IOptions<IdentityOptions> identityOptions)
-            : base(userManager, userRepository, roleRepository, identityOptions)
+            IOptions<IdentityOptions> identityOptions,
+            IPermissionChecker permissionChecker)
+            : base(userManager, userRepository, roleRepository, identityOptions, permissionChecker)
         {
         }
 
