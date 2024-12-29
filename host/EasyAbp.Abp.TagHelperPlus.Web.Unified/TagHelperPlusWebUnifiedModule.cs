@@ -155,7 +155,7 @@ namespace EasyAbp.Abp.TagHelperPlus
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.MapAbpStaticAssets();
             app.UseRouting();
             app.UseAuthentication();
 
