@@ -6,8 +6,7 @@
 @inject IPageLayout PageLayout
 @inject IHtmlLocalizer<AbpValidationResource> L
 @{
-    PageLayout.Content.Title = L["Book"].Value;
-    PageLayout.Content.BreadCrumb.Add(L["Menu:Book"].Value);
+    PageLayout.Content.Title = L["Menu:Book"].Value;
     PageLayout.Content.MenuItemName = "Book";
 }
 
@@ -23,21 +22,16 @@
 {
     <abp-style src="/Pages/Books/Book/index.css"/>
 }
+@section content_toolbar
+{
+    <abp-button id="NewBookButton"
+                text="New"
+                icon="plus"
+                size="Small"
+                button-type="Primary" />
+}
 
 <abp-card>
-    <abp-card-header>
-        <abp-row>
-            <abp-column size-md="_6">
-                <abp-card-title>@L["Book"]</abp-card-title>
-            </abp-column>
-            <abp-column size-md="_6" class="text-end">
-                <abp-button id="NewBookButton"
-                            text="New"
-                            icon="plus"
-                            button-type="Primary" />
-            </abp-column>
-        </abp-row>
-    </abp-card-header>
     <abp-card-body>
         <abp-table striped-rows="true" id="BookTable" class="nowrap">
             <thead>

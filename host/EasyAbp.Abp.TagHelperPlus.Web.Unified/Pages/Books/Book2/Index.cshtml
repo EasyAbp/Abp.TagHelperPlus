@@ -6,8 +6,7 @@
 @inject IPageLayout PageLayout
 @inject IHtmlLocalizer<AbpValidationResource> L
 @{
-    PageLayout.Content.Title = L["Book2"].Value;
-    PageLayout.Content.BreadCrumb.Add(L["Menu:Book2"].Value);
+    PageLayout.Content.Title = L["Menu:Book2"].Value;
     PageLayout.Content.MenuItemName = "Book2";
 }
 
@@ -22,13 +21,6 @@
 
 <abp-dynamic-form abp-model="ViewModel" data-ajaxForm="true" asp-page="Index">
     <abp-card>
-        <abp-card-header>
-            <abp-row>
-                <abp-column size-md="_6">
-                    <abp-card-title>@L["UserId"]</abp-card-title>
-                </abp-column>
-            </abp-row>
-        </abp-card-header>
         <abp-card-body>
             <abp-form-content></abp-form-content>
         </abp-card-body>
